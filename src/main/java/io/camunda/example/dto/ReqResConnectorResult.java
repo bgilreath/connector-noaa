@@ -1,3 +1,9 @@
 package io.camunda.example.dto;
 
-public record ReqResConnectorResult(String response) {}
+import java.util.Map;
+public record ReqResConnectorResult(Map<String, Object> response) {}
+
+//TODO use JSON as the response
+//import com.fasterxml.jackson.databind.util.JSONPObject;
+//public record NoaaConnectorResult(JSONPObject response) {}
+//public record ReqResConnectorResult(JSONPObject response) {}

@@ -1,20 +1,8 @@
-# ReqRes Connector Example
+# NOAA National Weather Service Connector Example
 
-A Camunda 8 example connector working with https://reqres.in/
-
-
-> * [Element Template](./element-templates/template-connector.json)
-> * [POM](./pom.xml) (artifact name, id, description)
-> * [Connector Function](src/main/java/io/camunda/example/ReqResConnectorFunction.java)
-> * [Service Provider Interface (SPI)](./src/main/resources/META-INF/services/io.camunda.connector.api.outbound.OutboundConnectorFunction)
-> 
-> Read more about [creating Connectors](https://docs.camunda.io/docs/components/connectors/custom-built-connectors/connector-sdk/#creating-a-custom-connector)
->
-> Check out the [Connectors SDK](https://github.com/camunda/connector-sdk)
-
+A Camunda 8 example connector working with https://api.weather.gov/
 
 ## Build
-
 You can package the Connector by running:
 
 ```bash
@@ -42,17 +30,17 @@ provides more details on relocations.
 
 | Name     | Description      | Example           | Notes                                                                      |
 |----------|------------------|-------------------|----------------------------------------------------------------------------|
-| page | controll page number to fetch    | `2`           |  Affects which entries will be returned |
-| per_page    | Controll how many entries will be retruned per page | `3` | Affcets the numbe rof entries on a page and the result set size |
+| user_site  | your website or a unique looking tld    | `wx.x.com`           |  Used for NOAA API Authentication |
+| user_email    | your email address | `made@up.com` | Used for NOAA API Authentication |
+| grid_area    | NWS Forecast Office ID | `SGX` | limits the forecast grid |
+| grid    | Forecast grid x,y coordinates | `35,57` | specific forecast area |
+
+List of grid_area:
+AKQ, ALY, BGM, BOX, BTV, BUF, CAE, CAR, CHS, CLE, CTP, GSP, GYX, ILM, ILN, LWX, MHX, OKX, PBZ, PHI, RAH, RLX, RNK, ABQ, AMA, BMX, BRO, CRP, EPZ, EWX, FFC, FWD, HGX, HUN, JAN, JAX, KEY, LCH, LIX, LUB, LZK, MAF, MEG, MFL, MLB, MOB, MRX, OHX, OUN, SHV, SJT, SJU, TAE, TBW, TSA, ABR, APX, ARX, BIS, BOU, CYS, DDC, DLH, DMX, DTX, DVN, EAX, FGF, FSD, GID, GJT, GLD, GRB, GRR, ICT, ILX, IND, IWX, JKL, LBF, LMK, LOT, LSX, MKX, MPX, MQT, OAX, PAH, PUB, RIW, SGF, TOP, UNR, BOI, BYZ, EKA, FGZ, GGW, HNX, LKN, LOX, MFR, MSO, MTR, OTX, PDT, PIH, PQR, PSR, REV, SEW, SGX, SLC, STO, TFX, TWC, VEF, AER, AFC, AFG, AJK, ALU, GUM, HPA, HFO, PPG, STU, NH1, NH2, ONA, ONP
 
 ### Output
 
-"Response received: " + http response body
-
-Response Body: 
-```json
-{"page":2,"per_page":3,"total":12,"total_pages":4,"data":[{"id":4,"email":"eve.holt@reqres.in","first_name":"Eve","last_name":"Holt","avatar":"https://reqres.in/img/faces/4-image.jpg"},{"id":5,"email":"charles.morris@reqres.in","first_name":"Charles","last_name":"Morris","avatar":"https://reqres.in/img/faces/5-image.jpg"},{"id":6,"email":"tracey.ramos@reqres.in","first_name":"Tracey","last_name":"Ramos","avatar":"https://reqres.in/img/faces/6-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}}
-```
+Returns the wind speed in us units, i.e. "10 mph"
 
 ### Error codes
 
@@ -85,4 +73,4 @@ It is not mandatory to generate the element template for your connector and you 
 However, the generator provides a convenient way to create the template and keep it in sync with the connector input class
 and empowers you to prototype and iterate quickly.
 
-The generated element template can be found in [element-templates/req-res-connector.json](./element-templates/req-res-connector.json).
+The generated element template can be found in [element-templates/noaa-nws-connector.json](./element-templates/noaa-nws-connector.json).
